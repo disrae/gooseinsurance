@@ -8,13 +8,12 @@ const { Login, Home } = Routes;
 import ScreenA from './src/pages/ScreenA';
 import ScreenB from './src/pages/ScreenB';
 
-function App(): JSX.Element {
-  Stack;
+function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name={Home} component={ScreenA} />
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name={Login} component={ScreenB} />
+        <Stack.Screen name={Home} component={ScreenA} />
       </Stack.Navigator>
     </NavigationContainer>
   );
