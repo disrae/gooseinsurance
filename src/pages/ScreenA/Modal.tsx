@@ -8,10 +8,10 @@ import {
   width,
 } from '../../constants.styles';
 import { useNavigation } from '@react-navigation/native';
-import { Routes } from '../../navigation/constants';
+import { MainStackParamList, NavProp } from '../../navigation/stackNavigator';
 
-function Modal() {
-  const navigator = useNavigation();
+function Modal({ navigation }: NavProp) {
+  const navigator = useNavigation<MainStackParamList>();
   return (
     <View style={container}>
       {loginMethods.map(({ string, img, shouldNavigate }, i) => (
@@ -19,8 +19,7 @@ function Modal() {
           key={string}
           style={style(i).row}
           onPress={() => {
-            // @ts-ignore
-            if (shouldNavigate) navigator.navigate(Routes.Login);
+            if (shouldNavigate) navigation.navigate('Login');
           }}
         >
           <Image source={img} style={providerIcon} />

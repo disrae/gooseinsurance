@@ -1,8 +1,16 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {
+  createNativeStackNavigator,
+  NativeStackScreenProps,
+} from '@react-navigation/native-stack';
 
-const Stack = createNativeStackNavigator();
+export type MainStackParamList = {
+  Home: undefined;
+  Login: undefined;
+};
 
-export default Stack;
+export type NavProp = NativeStackScreenProps<MainStackParamList, 'Home'>;
+
+export const Stack = createNativeStackNavigator<MainStackParamList>();
 
 export const Routes = {
   Home: 'Home',

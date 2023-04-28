@@ -60,4 +60,5 @@ const style = StyleSheet.create({
   },
 });
 
-export default style;
+export const { bottomHalf, flag, logo, policyContainer, slogan, topHalf } =
+  style;

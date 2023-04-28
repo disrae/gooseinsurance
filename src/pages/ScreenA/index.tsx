@@ -1,7 +1,14 @@
 import React from 'react';
 
 import { Image, SafeAreaView, StatusBar, View, Text } from 'react-native';
-import style from './styles';
+import {
+  bottomHalf,
+  flag,
+  logo,
+  policyContainer,
+  slogan,
+  topHalf,
+} from './styles';
 import {
   useShadow,
   devBorder,
@@ -10,10 +17,12 @@ import {
   DARK_GRAY,
 } from '../../constants.styles';
 import Modal from './Modal';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { MainStackParamList } from '../../navigation/stackNavigator';
 
-const { bottomHalf, flag, logo, policyContainer, slogan, topHalf } = style;
+type NavProp = NativeStackScreenProps<MainStackParamList, 'Home'>;
 
-function ScreenA() {
+function ScreenA({ navigation }: NavProp) {
   return (
     <View style={{ flex: 1 }}>
       <StatusBar barStyle="light-content" />
@@ -31,7 +40,7 @@ function ScreenA() {
         />
         <Text style={slogan}>{'THE INSURANCE SUPER-APP'}</Text>
         <View style={{ height: height * 0.13 }} />
-        <Modal />
+        <Modal navigation={navigation} />
       </View>
       <View style={bottomHalf}>
         <View style={policyContainer}>
