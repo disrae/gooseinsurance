@@ -8,11 +8,16 @@ import {
 } from '../../constants.styles';
 
 const styles = StyleSheet.create({
+  bottomLogin: {
+    flex: 0.15,
+    backgroundColor: PINK,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   headerContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    // ...devBorder,
   },
   image: {
     height: HEADER_SIZE,
@@ -24,13 +29,6 @@ const styles = StyleSheet.create({
     left: 10,
     padding: 5,
     zIndex: 2,
-    // ...devBorder,
-  },
-  login: {
-    flex: 0.15,
-    backgroundColor: PINK,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   loginButtonText: {
     fontSize: 20,
@@ -42,22 +40,21 @@ const styles = StyleSheet.create({
     fontWeight: '800',
   },
   loginInputTitle: {
-    size: 10,
+    fontSize: 10,
     color: LIGHT_TEXT,
     fontWeight: '600',
   },
   mainContainer: {
     flex: 1,
     paddingHorizontal: 5,
-    // ...devBorder,
   },
 });
 
 export const {
+  bottomLogin,
   headerContainer,
   image,
   leftArrowContainer,
-  login,
   loginButtonText,
   loginText,
   loginInputTitle,

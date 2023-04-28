@@ -6,6 +6,8 @@ import {
 export type MainStackParamList = {
   Home: undefined;
   Login: undefined;
+  Products: undefined;
+  User: undefined;
 };
 
 export type NavProp = NativeStackScreenProps<MainStackParamList, 'Home'>;

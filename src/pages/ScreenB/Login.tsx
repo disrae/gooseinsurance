@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Dispatch, useEffect, useState } from 'react';
 import {
   Image,
   StatusBar,
@@ -7,38 +7,48 @@ import {
   View,
   TextInput,
 } from 'react-native';
-import {
-  DARK_GRAY,
-  GOOSE_PINK,
-  HEADER_SIZE,
-  LIGHT_GRAY,
-  PINK,
-  WHITE,
-  devBorder,
-} from '../../constants.styles';
+import { LIGHT_GRAY, PINK, WHITE } from '../../constants.styles';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { MainStackParamList } from '../../navigation/stackNavigator';
+import { MainStackParamList } from '../../navigation/MainStackNavigator';
 import {
   headerContainer,
   image,
   leftArrowContainer,
-  login,
+  bottomLogin,
   loginButtonText,
   loginInputTitle,
   loginText,
   mainContainer,
 } from './styles';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../../redux/thunks';
+import { AnyAction } from 'redux';
+import { RootState } from '../../redux/store';
 
 type NavProp = NativeStackScreenProps<MainStackParamList, 'Login'>;
 
 const leftArrow = '\u2190';
 
 function ScreenB({ navigation }: NavProp) {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [emailFocused, setEmailFocused] = useState(false);
   const [password, setPassword] = useState('');
   const [passwordFocused, setPasswordFocused] = useState(false);
+  const { isLoading, products, user } = useSelector(
+    (state: RootState) => state.auth
+  );
+
+  useEffect(() => {
+    if (user) {
+      navigation.navigate('Products');
+    }
+  }, [user]);
+
+  function handleLogin() {
+    dispatch(login(email, password));
+  }
 
   return (
     <View style={{ flex: 1, backgroundColor: WHITE }}>
@@ -93,8 +103,8 @@ function ScreenB({ navigation }: NavProp) {
           />
         </View>
       </View>
-      <TouchableOpacity style={login}>
-        <Text style={loginButtonText}>Login</Text>
+      <TouchableOpacity style={bottomLogin} onPress={handleLogin}>
+        <Text style={loginButtonText}>{isLoading ? '...' : 'Login'}</Text>
       </TouchableOpacity>
     </View>
   );

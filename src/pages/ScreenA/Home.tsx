@@ -18,7 +18,7 @@ import {
 } from '../../constants.styles';
 import Modal from './Modal';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { MainStackParamList } from '../../navigation/stackNavigator';
+import { MainStackParamList } from '../../navigation/MainStackNavigator';
 
 type NavProp = NativeStackScreenProps<MainStackParamList, 'Home'>;
 

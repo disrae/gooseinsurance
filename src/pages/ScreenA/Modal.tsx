@@ -8,7 +8,10 @@ import {
   width,
 } from '../../constants.styles';
 import { useNavigation } from '@react-navigation/native';
-import { MainStackParamList, NavProp } from '../../navigation/stackNavigator';
+import {
+  MainStackParamList,
+  NavProp,
+} from '../../navigation/MainStackNavigator';
 
 function Modal({ navigation }: NavProp) {
   const navigator = useNavigation<MainStackParamList>();
