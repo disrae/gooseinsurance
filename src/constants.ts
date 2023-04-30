@@ -1,6 +1,6 @@
-import { Dimensions, StyleSheet } from 'react-native';
-import { isIos } from './contants';
+import { Dimensions, Platform } from 'react-native';
 
+export const isIos = Platform.OS === 'ios';
 export const { width, height } = Dimensions.get('window');
 
 // List of app colours.
@@ -13,12 +13,12 @@ export const LIGHT_TEXT = '#737387';
 export const PINK = '#F72697';
 export const GOOSE_PINK = '#D5398D';
 
-// List of app sizes.
+// List of hard coded sizes.
 export const FLAG_SIZE = 10;
 export const LOGO_SIZE = 10;
 export const HEADER_SIZE = 50;
 
-// Shared styles.
+// Style utilities.
 export function useShadow(
   size = 1,
   shadowOpacity = 0.1,

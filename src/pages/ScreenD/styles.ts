@@ -1,30 +1,12 @@
 import { StyleSheet } from 'react-native';
-import {
-  DARK_GRAY,
-  DARK_TEXT,
-  PINK,
-  WHITE,
-  devBorder,
-} from '../../constants.styles';
+import { DARK_TEXT, PINK, WHITE } from '../../constants';
 
 const BG_ACCOUNT = '#F4F4F4';
 
-export const {
-  rowContainer,
-  detailsContainer,
-  logoutButton,
-  logoutContainer,
-  logoutText,
-  mainContainer,
-  rowIcon,
-  rowText,
-  userName,
-  rightArrow,
-} = StyleSheet.create({
+export const styles = StyleSheet.create({
   detailsContainer: {
     backgroundColor: WHITE,
     padding: 10,
-    // ...devBorder,
   },
   logoutButton: {
     backgroundColor: PINK,
@@ -58,20 +40,17 @@ export const {
     position: 'absolute',
     bottom: 0,
     right: 0,
-    // ...devBorder,
   },
   rowIcon: {
     resizeMode: 'contain',
     width: 20,
     height: 20,
     marginHorizontal: 10,
-    // ...devBorder,
   },
   rowContainer: {
     flexDirection: 'row',
     alignItems: 'flex-start',
     paddingVertical: 10,
-    //   ...devBorder,
   },
   rowText: {
     alignSelf: 'center',

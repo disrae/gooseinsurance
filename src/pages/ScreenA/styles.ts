@@ -1,16 +1,14 @@
 import { StyleSheet } from 'react-native';
 import {
-  DARK_GRAY,
-  devBorder,
   FLAG_SIZE,
   GOOSE_PINK,
+  height,
   LIGHT_GRAY,
   useShadow,
   WHITE,
-  width,
-} from '../../constants.styles';
+} from '../../constants';
 
-const style = StyleSheet.create({
+export const styles = StyleSheet.create({
   bottomHalf: {
     flex: 0.56,
     backgroundColor: LIGHT_GRAY,
@@ -58,7 +56,9 @@ const style = StyleSheet.create({
     backgroundColor: GOOSE_PINK,
     ...useShadow(5, 0.08, 0),
   },
+  verticalGap: {
+    height: height * 0.13,
+  },
 });
 
-export const { bottomHalf, flag, logo, policyContainer, slogan, topHalf } =
-  style;
+export default styles;

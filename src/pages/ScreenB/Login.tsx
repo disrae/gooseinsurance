@@ -1,4 +1,4 @@
-import React, { Dispatch, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Image,
   StatusBar,
@@ -6,43 +6,36 @@ import {
   TouchableOpacity,
   View,
   TextInput,
+  SafeAreaView,
 } from 'react-native';
-import { LIGHT_GRAY, PINK, WHITE } from '../../constants.styles';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { MainStackParamList } from '../../navigation/MainStackNavigator';
-import {
-  headerContainer,
-  image,
-  leftArrowContainer,
-  bottomLogin,
-  loginButtonText,
-  loginInputTitle,
-  loginText,
-  mainContainer,
-} from './styles';
-import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../../redux/thunks';
-import { AnyAction } from 'redux';
-import { RootState } from '../../redux/store';
 
-type NavProp = NativeStackScreenProps<MainStackParamList, 'Login'>;
+import { useNavigation } from '@react-navigation/native';
+import { RootStackNavigationProp, RootStackScreens } from '../../navigation';
+
+import { useSelector } from 'react-redux';
+import { login } from '../../redux/thunks';
+
+import { RootState, useAppDispatch } from '../../redux/store';
+import { LIGHT_GRAY, PINK, WHITE } from '../../constants';
+import { styles as s } from './styles';
 
 const leftArrow = '\u2190';
+const gooseLogo = require('../../../assets-goose-insurance/ScreenB/goose-logo.webp');
 
-function ScreenB({ navigation }: NavProp) {
-  const dispatch = useDispatch();
+function Login() {
+  const dispatch = useAppDispatch();
+  const navigation = useNavigation<RootStackNavigationProp>();
   const [email, setEmail] = useState('');
   const [emailFocused, setEmailFocused] = useState(false);
   const [password, setPassword] = useState('');
   const [passwordFocused, setPasswordFocused] = useState(false);
-  const { isLoading, products, user } = useSelector(
+  const { isLoading, user, error } = useSelector(
     (state: RootState) => state.auth
   );
 
   useEffect(() => {
     if (user) {
-      navigation.navigate('Products');
+      navigation.navigate(RootStackScreens.AccountTabNavigator);
     }
   }, [user]);
 
@@ -54,24 +47,23 @@ function ScreenB({ navigation }: NavProp) {
     <View style={{ flex: 1, backgroundColor: WHITE }}>
       <SafeAreaView style={{ backgroundColor: WHITE }} />
       <StatusBar barStyle="dark-content" />
-      <View style={headerContainer}>
-        <View style={leftArrowContainer}>
-          <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+      <View style={s.headerContainer}>
+        <View style={s.leftArrowContainer}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate(RootStackScreens.LandingPage)}
+          >
             <Text style={{ fontSize: 40, color: '#CCC' }}>{leftArrow}</Text>
           </TouchableOpacity>
         </View>
-        <Image
-          style={image}
-          source={require('../../../assets-goose-insurance/ScreenB/goose-logo.webp')}
-        />
+        <Image style={s.image} source={gooseLogo} />
       </View>
-      <View style={mainContainer}>
+      <View style={s.mainContainer}>
         <View style={{ paddingVertical: 30, paddingLeft: 15 }}>
-          <Text style={loginText}>Login</Text>
+          <Text style={s.loginText}>Login</Text>
         </View>
         <View style={{ paddingHorizontal: 15 }}>
           <View style={{ paddingVertical: 15 }}>
-            <Text style={loginInputTitle}>ENTER YOUR EMAIL</Text>
+            <Text style={s.loginInputTitle}>ENTER YOUR EMAIL</Text>
           </View>
           <TextInput
             style={{
@@ -87,7 +79,7 @@ function ScreenB({ navigation }: NavProp) {
             keyboardType="email-address"
           />
           <View style={{ paddingVertical: 15 }}>
-            <Text style={loginInputTitle}>PASSWORD</Text>
+            <Text style={s.loginInputTitle}>PASSWORD</Text>
           </View>
           <TextInput
             style={{
@@ -102,12 +94,13 @@ function ScreenB({ navigation }: NavProp) {
             secureTextEntry={true}
           />
         </View>
+        {/* Conditionally render error here */}
       </View>
-      <TouchableOpacity style={bottomLogin} onPress={handleLogin}>
-        <Text style={loginButtonText}>{isLoading ? '...' : 'Login'}</Text>
+      <TouchableOpacity style={s.bottomLogin} onPress={handleLogin}>
+        <Text style={s.loginButtonText}>{isLoading ? '...' : 'Login'}</Text>
       </TouchableOpacity>
     </View>
   );
 }
 
-export default ScreenB;
+export default Login;

@@ -1,89 +1,63 @@
 import React, { useEffect } from 'react';
-import { Image } from 'react-native';
-import { SafeAreaView, Text, View, TouchableOpacity } from 'react-native';
-import { logout, selectAuthState } from '../../redux/authSlice';
+import {
+  SafeAreaView,
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+} from 'react-native';
+
+import { useNavigation } from '@react-navigation/native';
+import { AccountNavigationProp, AccountTabScreens } from '../../navigation';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
-import { WHITE } from '../../constants.styles';
-import {
-  rowContainer,
-  detailsContainer,
-  mainContainer,
-  rowIcon,
-  rowText,
-  userName,
-  rightArrow,
-  logoutContainer,
-  logoutButton,
-  logoutText,
-} from './styles';
-import { NavProp } from '../../navigation/MainStackNavigator';
+import { logout } from '../../redux/authSlice';
 
-export default function Account({ navigation }: NavProp) {
-  const { isLoading, products, user } = useSelector(
-    (state: RootState) => state.auth
-  );
+import { WHITE } from '../../constants';
+import { styles as s } from './styles';
+import { formatAddress, formatBirthday } from '../../stringUtilities';
+
+const [cake, home, rightArrowGhost] = [
+  require('../../../assets-goose-insurance/ScreenD/profile-cake.webp'),
+  require('../../../assets-goose-insurance/ScreenD/profile-home.webp'),
+  require('../../../assets-goose-insurance/ScreenD/pink-right-arrow-ghost.webp'),
+];
+
+function Account() {
+  const navigation = useNavigation<AccountNavigationProp>();
+  const { user } = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch();
+
   useEffect(() => {
-    console.log({ user });
-    if (!user) navigation.navigate('Home');
+    if (!user) navigation.navigate(AccountTabScreens.Home);
   }, [user]);
 
   return (
-    <View style={mainContainer}>
+    <View style={s.mainContainer}>
       <SafeAreaView style={{ backgroundColor: WHITE }} />
-      <View style={detailsContainer}>
-        <Text style={userName}>{user?.name}</Text>
-        <View style={rowContainer}>
-          <Image
-            style={rowIcon}
-            source={require('../../../assets-goose-insurance/ScreenD/profile-cake.webp')}
-          />
-          <Text style={rowText}>{formatBirthday(user?.birthday)}</Text>
+      <View style={s.detailsContainer}>
+        <Text style={s.userName}>{user?.name}</Text>
+        <View style={s.rowContainer}>
+          <Image style={s.rowIcon} source={cake} />
+          <Text style={s.rowText}>{formatBirthday(user?.birthday)}</Text>
         </View>
-        <View style={rowContainer}>
-          <Image
-            style={rowIcon}
-            source={require('../../../assets-goose-insurance/ScreenD/profile-home.webp')}
-          />
-          <Text style={rowText}>{formatAddress(user?.address)}</Text>
+        <View style={s.rowContainer}>
+          <Image style={s.rowIcon} source={home} />
+          <Text style={s.rowText}>{formatAddress(user?.address)}</Text>
         </View>
-        <Image
-          style={rightArrow}
-          source={require('../../../assets-goose-insurance/ScreenD/pink-right-arrow-ghost.webp')}
-        />
+        <Image style={s.rightArrow} source={rightArrowGhost} />
       </View>
-      <View style={logoutContainer}>
+      <View style={s.logoutContainer}>
         <TouchableOpacity
-          style={logoutButton}
+          style={s.logoutButton}
           onPress={() => dispatch(logout())}
         >
-          <Text style={logoutText}>Logout</Text>
+          <Text style={s.logoutText}>Logout</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 }
 
-function formatBirthday(birthdayString: string | undefined) {
-  if (!birthdayString) return '';
-
-  const date = new Date(birthdayString);
-  const options: Intl.DateTimeFormatOptions = {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  };
-  const formattedDate = new Intl.DateTimeFormat('en-US', options).format(date);
-  return formattedDate;
-}
-
-function formatAddress(address: string | undefined) {
-  if (!address) return '';
-
-  const formattedAddress = address
-    .replace(/(\d+)/, '$1\n')
-    .replace(/([A-Z]{2}\s)/, '$1\n')
-    .replace('\n', '');
-  return formattedAddress;
-}
+export default Account;

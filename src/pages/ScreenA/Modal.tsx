@@ -1,37 +1,9 @@
 import { Image, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import {
-  BLACK,
-  WHITE,
-  devBorder,
-  height,
-  useShadow,
-  width,
-} from '../../constants.styles';
-import { useNavigation } from '@react-navigation/native';
-import {
-  MainStackParamList,
-  NavProp,
-} from '../../navigation/MainStackNavigator';
 
-function Modal({ navigation }: NavProp) {
-  const navigator = useNavigation<MainStackParamList>();
-  return (
-    <View style={container}>
-      {loginMethods.map(({ string, img, shouldNavigate }, i) => (
-        <TouchableOpacity
-          key={string}
-          style={style(i).row}
-          onPress={() => {
-            if (shouldNavigate) navigation.navigate('Login');
-          }}
-        >
-          <Image source={img} style={providerIcon} />
-          <Text style={text}>{`Continue with ${string}`}</Text>
-        </TouchableOpacity>
-      ))}
-    </View>
-  );
-}
+import { useNavigation } from '@react-navigation/native';
+import { RootStackNavigationProp, RootStackScreens } from '../../navigation';
+
+import { BLACK, WHITE, height, useShadow, width } from '../../constants';
 
 const loginMethods = [
   {
@@ -55,6 +27,27 @@ const loginMethods = [
     shouldNavigate: true,
   },
 ];
+
+function Modal() {
+  const navigation = useNavigation<RootStackNavigationProp>();
+
+  return (
+    <View style={container}>
+      {loginMethods.map(({ string, img, shouldNavigate }, i) => (
+        <TouchableOpacity
+          key={string}
+          style={style(i).row}
+          onPress={() => {
+            if (shouldNavigate) navigation.navigate(RootStackScreens.Login);
+          }}
+        >
+          <Image source={img} style={providerIcon} />
+          <Text style={text}>{`Continue with ${string}`}</Text>
+        </TouchableOpacity>
+      ))}
+    </View>
+  );
+}
 
 function style(i = 0) {
   const needsBottomBorder = i < loginMethods.length - 1;

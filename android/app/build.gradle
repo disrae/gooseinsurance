@@ -166,9 +166,12 @@ dependencies {
         implementation jscFlavor
     }
 
+    // For webp images.
     implementation 'com.facebook.fresco:webpsupport:2.5.0'
     // Optionally, to display animated WebP images, you have to add:
     implementation 'com.facebook.fresco:animated-webp:2.5.0'
+    // For gifs.
+    implementation 'com.facebook.fresco:animated-gif:2.6.0'
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)

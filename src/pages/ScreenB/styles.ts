@@ -1,13 +1,7 @@
 import { StyleSheet } from 'react-native';
-import {
-  HEADER_SIZE,
-  LIGHT_TEXT,
-  PINK,
-  WHITE,
-  devBorder,
-} from '../../constants.styles';
+import { HEADER_SIZE, LIGHT_TEXT, PINK, WHITE } from '../../constants';
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   bottomLogin: {
     flex: 0.15,
     backgroundColor: PINK,
@@ -49,14 +43,3 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
   },
 });
-
-export const {
-  bottomLogin,
-  headerContainer,
-  image,
-  leftArrowContainer,
-  loginButtonText,
-  loginText,
-  loginInputTitle,
-  mainContainer,
-} = styles;

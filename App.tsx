@@ -1,24 +1,18 @@
-// Import pattern as per company style guide.
+// React imports.
 import React from 'react';
 import { Provider } from 'react-redux';
-
+// Navigation imports.
 import { NavigationContainer } from '@react-navigation/native';
-import { Stack } from './src/navigation/MainStackNavigator';
-
-import Home from './src/pages/ScreenA/Home';
-import Login from './src/pages/ScreenB/Login';
-import Products, { AccountTabNavigator } from './src/pages/ScreenC/Products';
+import MainNavigationStack from './src/navigation';
+// Redux imports.
 import store from './src/redux/store';
+// Self imports: components, pages, styles, resources.
 
 function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen name={'Home'} component={Home} />
-          <Stack.Screen name={'Login'} component={Login} />
-          <Stack.Screen name={'Products'} component={AccountTabNavigator} />
-        </Stack.Navigator>
+        <MainNavigationStack />
       </NavigationContainer>
     </Provider>
   );
