@@ -1,5 +1,7 @@
 # Summary
 
+[Challenge Specifications](./GooseInsuranceChallengeSpecifications.pdf)
+
 1. Install Instructions
 2. File Structure
 3. Code Philosophy
@@ -59,6 +61,7 @@ https://user-images.githubusercontent.com/26100016/235329142-c77840cd-dac3-4177-
   would help ensure the core functionality is there after a code change.
 
 - As the app grows, I would separate the navigation index file into individual navigator files, they would then be exported as a single navigator in the index file.
+- Currently the app has only been tested on two device, an iPhone14 and an Android Pixel 3, ideally more testing would be done to check if the layout holds its shape well, and if the packages used work as expected on those devices.
 
 ### 7 👷🏼‍♂️ Struggles and Mentions 👷🏼‍♂️
 
